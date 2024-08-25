@@ -2,7 +2,6 @@
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation';
-import { isatty } from 'tty';
 
 interface SidebarItemProps {
     icon: LucideIcon,

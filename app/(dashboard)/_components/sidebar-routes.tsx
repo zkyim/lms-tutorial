@@ -1,6 +1,6 @@
 "use client"
 import { BarChart, Compass, Layout, List } from 'lucide-react';
-import React, { useCallback } from 'react'
+import React from 'react'
 import SidebarItem from './sidebar-item';
 import { usePathname } from 'next/navigation';
 
