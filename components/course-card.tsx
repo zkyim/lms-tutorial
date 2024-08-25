@@ -1,10 +1,11 @@
 import { IconBadge } from '@/components/icon-badge';
 import { formatPrice } from '@/lib/format';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Image as ImageLucide } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import CourseProgress from './course-progress';
+import { cn } from '@/lib/utils';
 
 interface CourseCardProps {
     id: string;
@@ -28,13 +29,15 @@ const CourseCard = ({
   return (
     <Link href={`/courses/${id}`}> 
         <div className='group hover:shadow-sm transition overflow-hidden border rounded-lg p-3 w-full'>
-            <div className='relative w-full aspect-video rounded-md overflow-hidden'>
-                <Image 
-                    fill
-                    className='object-cover'
-                    alt={`image course`}
-                    src={imageUrl}
-                />
+            <div className={cn('relative w-full aspect-video rounded-md overflow-hidden', !imageUrl && "bg-slate-300 animate-pulse flex items-center justify-center")}>
+                {imageUrl ? (
+                    <Image 
+                        fill
+                        className='object-cover'
+                        alt={`image course`}
+                        src={imageUrl}
+                    />
+                ) : <ImageLucide className='h-8 w-8' />}
             </div>
             <div className='flex flex-col pt-2'>
                 <div className='text-lg md:text-base font-medium group-hover:text-sky-700 transition line-clamp-2'>{title}</div>
