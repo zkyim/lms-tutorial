@@ -8,7 +8,7 @@ import React from 'react'
 import ChapterTitleForm from './_components/chapter-title-form';
 import ChpaterDescriptionForm from './_components/chapter-description-form';
 import ChapterAccessForm from './_components/chapter-access-form';
-import ChapterVideoForm from './_components/chapter-videw-form';
+import ChapterVideoForm from './_components/chapter-video-form';
 import Banner from '@/components/banner';
 import ChapterActions from './_components/chapter-actions';
 

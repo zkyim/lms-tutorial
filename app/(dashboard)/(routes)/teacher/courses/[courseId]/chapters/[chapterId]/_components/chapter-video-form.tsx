@@ -6,13 +6,12 @@ import { z } from "zod"
 import MuxPlayer from "@mux/mux-player-react"
 
 import { Button } from "@/components/ui/button"
-import { ImageIcon, Pencil, PlusCircle, Video } from "lucide-react"
+import { PlusCircle, Video } from "lucide-react"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import { Chapter, Course, MuxData } from "@prisma/client"
-import Image from "next/image"
+import { Chapter, MuxData } from "@prisma/client"
 import { FileUpload } from "@/components/file-upload"
 
 const formSchema = z.object({
@@ -57,7 +56,7 @@ const ChapterVideoForm: React.FC<ChapterVideoFormProps> = ({
     return (
         <div className='mt-6 border bg-slate-100 rounded-md p-4'>
             <div className="font-medium flex items-center justify-between">
-                Chapter Image
+                Chapter Video
                 <Button variant={"ghost"} onClick={toggleEdit}>
                     {isEditing && (
                         <>Cancel</>
@@ -65,13 +64,13 @@ const ChapterVideoForm: React.FC<ChapterVideoFormProps> = ({
                     {!isEditing && !initialData.videoUrl && (
                         <>
                             <PlusCircle className="h-4 w-4 mr-2" />
-                            Add a Videw
+                            Add a Video
                         </>
                     )}
                     {!isEditing && initialData.videoUrl && (
                         <>
                             <Video className="h-4 w-4 mr-2"/>
-                            Edit Videw
+                            Edit Video
                         </>
                     )}
                 </Button>
@@ -79,7 +78,7 @@ const ChapterVideoForm: React.FC<ChapterVideoFormProps> = ({
             {!isEditing &&  (
                 !initialData.videoUrl ? (
                     <div className="flex items-center justify-center h-60 bg-slate-200 rounded-md">
-                        <ImageIcon className="h-10 w-10 text-slate-500" />
+                        <Video className="h-10 w-10 text-slate-500" />
                     </div>
                 ) : (
                     <div className="relative aspect-video mt-2">

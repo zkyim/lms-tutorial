@@ -24,6 +24,8 @@ const ChapterList: React.FC<ChapterListProps> = ({
     onEdit
 }) => {
     const [chapters, setChapters] = useState(items);
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(()=>setIsMounted(true), []);
     
     useEffect(()=>{
         setChapters(items);
@@ -35,12 +37,10 @@ const ChapterList: React.FC<ChapterListProps> = ({
         const [reorderedItem] = items.splice(result.source.index, 1);
         items.splice(result.destination.index, 0, reorderedItem)
 
-        console.log(result.source.index)
-
         const startIndex = Math.min(result.source.index, result.destination.index);
         const endIndex = Math.max(result.source.index, result.destination.index);
 
-        const updatedChapters = items.splice(startIndex, endIndex + 1);
+        const updatedChapters = items.slice(startIndex, endIndex + 1);
 
         setChapters(items);
 
@@ -52,8 +52,6 @@ const ChapterList: React.FC<ChapterListProps> = ({
         onReorder(bulkUpdateData)
     }
     
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(()=>setIsMounted(true), []);
     if (!isMounted) return null;
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -73,7 +71,7 @@ const ChapterList: React.FC<ChapterListProps> = ({
                                 ref={provided.innerRef}
                                 {...provided.draggableProps}
                                 >
-                                    <div className={cn("px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
+                                    <div className={cn("px-2 py-3 border-r mr-2 border-r-slate-200 hover:bg-slate-300 rounded-l-md transition",
                                         chapter.isPublished && "border-r-sky-200 hover:bg-sky-200"
                                     )}
                                     {...provided.dragHandleProps}
