@@ -50,7 +50,8 @@ export async function DELETE (
                 },
             });
             if (existingMuxData) {
-                await mux.video.assets.delete(existingMuxData.assetId);
+                // if video not found in mux will found error
+                // await mux.video.assets.delete(existingMuxData.assetId);
                 await db.muxData.delete({
                     where: {
                         id: existingMuxData.id,

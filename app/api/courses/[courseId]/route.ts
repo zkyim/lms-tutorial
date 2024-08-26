@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import Mux from "@mux/mux-node"
 import { isTeacher } from "@/lib/teacher";
+import { UTApi } from "uploadthing/server";
 
 const mux = new Mux({
     tokenId: process.env.MUX_TOKEN_ID!,
@@ -39,9 +40,16 @@ export async function DELETE(
         
         for (const chapter of course.chapters) {
             if (chapter.muxData?.assetId) {
-                await mux.video.assets.delete(chapter.muxData.assetId);
+                // await mux.video.assets.delete(chapter.muxData.assetId);
             }
         }
+
+
+        // error in the Library
+        // if (course.imageUrl) {
+        //     const imageKey: string = course.imageUrl.substring(course.imageUrl.lastIndexOf('/') + 1);
+        //     await UTApi.prototype.deleteFiles([imageKey]);
+        // }
 
         const deletedCourse = await db.course.delete({
             where: {
